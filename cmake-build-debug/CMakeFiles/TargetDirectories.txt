@@ -1,0 +1,3 @@
+/Users/das/CLionProjects/oopkurs/cmake-build-debug/CMakeFiles/rebuild_cache.dir
+/Users/das/CLionProjects/oopkurs/cmake-build-debug/CMakeFiles/edit_cache.dir
+/Users/das/CLionProjects/oopkurs/cmake-build-debug/CMakeFiles/oopkurs.dir
