@@ -1,8 +1,8 @@
-
 #ifndef OOPKURS_ADDRESSBOOK_H
 #define OOPKURS_ADDRESSBOOK_H
 
 #include <iostream>
+#include <fstream>
 #include <vector>
 #include <string>
 
@@ -27,7 +27,7 @@ struct Person {
 class AddressList {
 private:
     Person owner;
-    vector <Person> information; // Контакты: информационный состав друзей
+    vector <Person> information;
 public:
     AddressList();
     AddressList(const Person&, const vector<Person>& info = {});
@@ -38,6 +38,7 @@ public:
     void Modify ();
     void Search (int);
     void Print()const;
+    void Save();
 };
 
 

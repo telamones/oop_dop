@@ -17,8 +17,6 @@ AddressList::AddressList(const AddressList& r) {
 }
 
 void AddressList::Add(const Person& p) {
-    // Добавить информацию о друге в адресную книгу
-    // Сначала подтвердите, что он не существует: id + tele
     for (const auto& it : information) {
         if (p.m_id == it.m_id) {
             cout << "Идентификатор уже существует, добавление не удалось!\n";
@@ -38,29 +36,31 @@ void AddressList::Delete() {
     cin >> name;
     cout << "Найденная информация выглядит следующим образом: ";
     auto it = information.begin();
-    vector <int> info; // Индекс хранилища
-    for (int i(0); it != information.end(); ++it,++i) {
+    vector<int> info;
+    for (int i(0); it != information.end(); ++it, ++i) {
         if (it->m_name == name) info.push_back(i);
     }
     if (info.empty()) {
         cout << "Такого имени нет!\n";
         return;
     }
-    for (const auto& i : info) {
-        cout << i << ":\t" << information[i].m_id << '\t' << information[i].m_name
-             << '\t' << information[i].m_tele << endl;
+    for (const auto &i: info) {
+        cout << "\n" << information[i].m_id << " " << " " << information[i].m_surname << information[i].m_name
+             << " " << information[i].m_tele << endl;
     }
 
     int ind;
-    cout << "Введите нижний индекс (первый столбец) для удаления информации:";
-    cin>>ind;
-    for (const auto& i : info) {
+    cout << "Введите номер ID для удаления информации:";
+    cin >> ind;
+    ind--;
+    for (const auto &i: info) {
         if (i == ind) {
             information.erase(information.begin() + i);
-            return;
+            cout << "Контакт удален!\n";
+        } else {
+            cout << "Неверная информация ввода, удаление не удалось!\n";
         }
     }
-    cout << "Неверная информация ввода, удаление не удалось!\n";
 }
 
 void AddressList::Modify() {
@@ -185,5 +185,15 @@ void AddressList::Print()const {
             cout << "Такого ID нет!" << endl;
         }
     }
+}
+
+void AddressList::Save() {
+    ofstream out("addressbook.txt");
+    int n=information.size();
+    for (int i=0; i < n; ++i) {
+        out << information[i].m_id << '\t' << information[i].m_surname << '\t' << information[i].m_name
+        << '\t' << information[i].m_tele << endl;
+    }
+    out.close();
 }
 

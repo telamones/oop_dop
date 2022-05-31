@@ -9,8 +9,24 @@ int main() {
         p.m_surname = "Квашнина";
         p.m_tele = "9371828003";
     }
-    int I = 1;
     AddressList addr(p);
+
+    ifstream in("addressbook.txt");
+    int I;
+    while (!in.eof()) {
+        int id;
+        string name, surname, tele;
+        in >> id >> name >> surname >> tele;
+        {
+            p.m_id = id;
+            p.m_name = name;
+            p.m_surname = surname;
+            p.m_tele = tele;
+        }
+        addr.Add(p);
+        I=id;
+    }
+    in.close();
     {
         cout << "0.Выход\n"
              << "1.Добавить\n"
@@ -22,6 +38,7 @@ int main() {
     }
     int cho2;
     bool b(true);
+
     while (b) {
         int cho;
         int id;
@@ -42,7 +59,7 @@ int main() {
                 cin >> name;
                 cout << "Номер телефона: ";
                 cin >> tele;
-                id = I++;
+                id=++I;
                 {
                     p.m_id = id;
                     p.m_name = name;
@@ -50,14 +67,17 @@ int main() {
                     p.m_tele = tele;
                 }
                 addr.Add(p);
+                addr.Save();
                 break;
             case 2:
                 cout << "Удалить информацию: ";
                 addr.Delete();
+                addr.Save();
                 break;
             case 3:
                 cout << "Изменить информацию: ";
                 addr.Modify();
+                addr.Save();
                 break;
             case 4:
                 cout << "Поиск информации "
@@ -78,6 +98,7 @@ int main() {
         cout << endl;
     }
     return 0;
+
 }
 
 
