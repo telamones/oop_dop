@@ -9,12 +9,6 @@ AddressList::AddressList(const Person& r, const vector<Person>& info) {
     }
 }
 
-AddressList::AddressList(const AddressList& r) {
-    owner = r.owner;
-    for (const auto& i : r.information) {
-        information.push_back(i);
-    }
-}
 
 void AddressList::Add(const Person& p) {
     for (const auto& it : information) {
@@ -190,10 +184,12 @@ void AddressList::Print()const {
 void AddressList::Save() {
     ofstream out("addressbook.txt");
     int n=information.size();
-    for (int i=0; i < n; ++i) {
+    for (int i=0; i < n-1; ++i) {
         out << information[i].m_id << '\t' << information[i].m_surname << '\t' << information[i].m_name
         << '\t' << information[i].m_tele << endl;
     }
+    out << information[n-1].m_id << '\t' << information[n-1].m_surname << '\t' << information[n-1].m_name
+        << '\t' << information[n-1].m_tele;
     out.close();
 }
 

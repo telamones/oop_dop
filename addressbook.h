@@ -31,7 +31,6 @@ private:
 public:
     AddressList();
     AddressList(const Person&, const vector<Person>& info = {});
-    AddressList(const AddressList&);
 
     void Add (const Person &);
     void Delete ();
